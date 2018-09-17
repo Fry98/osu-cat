@@ -2,6 +2,8 @@ const fs = require('fs');
 const iohook = require('iohook');
 const canv = document.getElementById('mainView');
 const ctx = canv.getContext('2d');
+const { ipcRenderer } = require('electron');
+const config = require('./config.json');
 let images = [];
 let mouseArea = 0;
 let keyMap = [];
@@ -29,3 +31,38 @@ iohook.on('keyup', (e)=>{
 });
 
 iohook.start();
+
+{
+  let leftCode = 0;
+  let rightCode = 0
+  ipcRenderer.on('keybind', ()=>{
+    leftCode = config.leftClick;
+    rightCode = config.rightClick;
+    document.getElementById('left-inp').value = String.fromCharCode(leftCode);
+    document.getElementById('right-inp').value = String.fromCharCode(rightCode);
+    document.getElementById('bind-overlay').style.display = 'block';
+  });
+
+  document.getElementById('cancel').onclick = ()=>{
+    document.getElementById('bind-overlay').style.display = 'none';
+  };
+
+  document.getElementById('save').onclick = ()=>{
+    document.getElementById('bind-overlay').style.display = 'none';
+    config.rightClick = rightCode;
+    config.leftClick = leftCode;
+    fs.writeFileSync(__dirname + '/config.json', JSON.stringify(config), 'utf8');
+  };
+
+  document.getElementById('left-inp').onkeydown = (e)=>{
+    e.preventDefault();
+    leftCode = e.keyCode;
+    document.getElementById('left-inp').value = String.fromCharCode(e.keyCode);
+  };
+
+  document.getElementById('right-inp').onkeydown = (e)=>{
+    e.preventDefault();
+    rightCode = e.keyCode;
+    document.getElementById('right-inp').value = String.fromCharCode(e.keyCode);
+  };
+}

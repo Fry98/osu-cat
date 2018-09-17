@@ -1,10 +1,30 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, Menu} = require('electron');
 const path = require('path');
 const url = require('url');
 
 function createWindow(){
-  let win = new BrowserWindow({title: 'Bongo Cat for osu!', width: 640, height: 340, useContentSize: true});
-  win.setMenu(null);
+  let win = new BrowserWindow({title: 'Bongo Cat for osu!', width: 640, height: 360, useContentSize: true});  
+  const template = [
+    {
+      label: "Options",
+      submenu: [
+        {
+          label: 'Key Bindings',
+          click: ()=>{
+            win.webContents.send('keybind');
+          }
+        },
+        {
+          label: 'Exit',
+          click: ()=>{
+            app.quit();
+          }
+        }
+      ]
+    }
+  ];
+  const menu = Menu.buildFromTemplate(template);
+  win.setMenu(menu);
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'App/index.html'),
     protocol: 'file:',
@@ -13,7 +33,7 @@ function createWindow(){
   win.on('closed', ()=>{
     win = null;
   });
-  win.toggleDevTools();
+  // win.toggleDevTools();
 }
 
 app.on('ready', createWindow);

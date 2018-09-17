@@ -8,9 +8,9 @@ module.exports = ()=>{
     canv.width = (window.innerHeight / 9) * 16;
   }
   ctx.drawImage(images[mouseArea], 0, 0, 1280, 720, 0, 0, canv.width, canv.height);
-  if (keyMap[87]) {
+  if (keyMap[config.leftClick]) {
     ctx.drawImage(images[6], 0, 0, 1280, 720, 0, 0, canv.width, canv.height);
-  } else if (keyMap[69]) {
+  } else if (keyMap[config.rightClick]) {
     ctx.drawImage(images[6], 0, 0, 1280, 720, unit(20), unit(10), canv.width, canv.height);
   } else {
     ctx.drawImage(images[7], 0, 0, 1280, 720, unit(10), 0, canv.width, canv.height);
