@@ -1,0 +1,30 @@
+{
+  "name": "osu-cat",
+  "version": "1.0.0",
+  "description": "Bongo Cat for osu!",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-packager ./ Alpha --all --out Build --overwrite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fry98/osu-cat.git"
+  },
+  "keywords": [
+    "bongo",
+    "cat",
+    "osu"
+  ],
+  "author": "Fry98",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fry98/osu-cat/issues"
+  },
+  "homepage": "https://github.com/Fry98/osu-cat#readme",
+  "dependencies": {
+    "electron": "^2.0.9",
+    "electron-packager": "^12.1.2"
+  }
+}
