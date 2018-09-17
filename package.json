@@ -24,7 +24,24 @@
   },
   "homepage": "https://github.com/Fry98/osu-cat#readme",
   "dependencies": {
+    "iohook": "^0.2.0"
+  },
+  "devDependencies": {
     "electron": "^2.0.9",
     "electron-packager": "^12.1.2"
+  },
+  "iohook": {
+    "targets": [
+      "electron-57"
+    ],
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "arches": [
+      "x64",
+      "ia32"
+    ]
   }
 }
