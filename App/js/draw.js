@@ -9,15 +9,15 @@ module.exports = ()=>{
   }
   ctx.drawImage(images[mouseArea], 0, 0, 1280, 720, 0, 0, canv.width, canv.height);
   if (keyMap[87]) {
-    ctx.drawImage(images[4], 0, 0, 1280, 720, 0, 0, canv.width, canv.height);
+    ctx.drawImage(images[6], 0, 0, 1280, 720, 0, 0, canv.width, canv.height);
   } else if (keyMap[69]) {
-    ctx.drawImage(images[4], 0, 0, 1280, 720, unit(50), unit(10), canv.width, canv.height);
+    ctx.drawImage(images[6], 0, 0, 1280, 720, unit(20), unit(10), canv.width, canv.height);
   } else {
-    ctx.drawImage(images[5], 0, 0, 1280, 720, unit(10), unit(3), canv.width, canv.height);
+    ctx.drawImage(images[7], 0, 0, 1280, 720, unit(10), 0, canv.width, canv.height);
   }
 };
 
 function unit(point) {
-  let unit = canv.width / 1280;
+  let unit = canv.width / 640;
   return point*unit;
 }

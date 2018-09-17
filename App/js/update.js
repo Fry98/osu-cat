@@ -3,17 +3,19 @@ const { screen } = require('electron');
 module.exports = ()=>{
   const mousePos = screen.getCursorScreenPoint();
   const currentDisp = screen.getDisplayNearestPoint(mousePos).workAreaSize;
-  if (mousePos.x > (currentDisp.width / 2)) {
-    if (mousePos.y > (currentDisp.height / 2)) {
-      mouseArea = 2;
-    } else {
-      mouseArea = 1;
-    }
+  if (mousePos.x < (currentDisp.width / 3)) {    
+    upOrDown(0, 3);
+  } else if (mousePos.x < ((currentDisp.width / 3)) * 2) {
+    upOrDown(1, 2);
   } else {
-    if (mousePos.y > (currentDisp.height / 2)) {
-      mouseArea = 3;
+    upOrDown(4, 5);
+  }
+
+  function upOrDown(upArea, downArea) {
+    if (mousePos.y < (currentDisp.height / 2)) {
+      mouseArea = upArea;
     } else {
-      mouseArea = 0;
+      mouseArea = downArea;
     }
   }
 };
