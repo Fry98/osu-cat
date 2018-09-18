@@ -66,3 +66,8 @@ iohook.start();
     document.getElementById('right-inp').value = String.fromCharCode(e.keyCode);
   };
 }
+
+ipcRenderer.on('mtoggle', ()=>{
+  config.mouse = !config.mouse;
+  fs.writeFileSync(__dirname + '/config.json', JSON.stringify(config), 'utf8');
+});

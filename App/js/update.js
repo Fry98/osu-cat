@@ -15,5 +15,8 @@ module.exports = ()=>{
     } else {
       mouseArea = downArea;
     }
+    if (config.mouse) {
+      mouseArea += 6;
+    }
   }
 };
