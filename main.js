@@ -15,6 +15,12 @@ function createWindow(){
           }
         },
         {
+          label: 'Toggle Mouse/Tablet',
+          click: ()=>{
+            win.webContents.send('mtoggle');
+          }
+        },
+        {
           label: 'Exit',
           click: ()=>{
             app.quit();
