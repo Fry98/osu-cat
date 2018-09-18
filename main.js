@@ -3,7 +3,18 @@ const path = require('path');
 const url = require('url');
 
 function createWindow(){
-  let win = new BrowserWindow({title: 'Bongo Cat for osu!', width: 640, height: 360, useContentSize: true});  
+  let win = new BrowserWindow({title: 'Bongo Cat for osu!', width: 640, height: 360, useContentSize: true});
+  let shouldQuit = app.makeSingleInstance(() => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (win) {
+      if (win.isMinimized()) win.restore();
+      win.focus();
+    }
+  });  
+  if (shouldQuit) {
+    app.quit();
+    return;
+  }
   const template = [
     {
       label: "Options",
@@ -12,6 +23,12 @@ function createWindow(){
           label: 'Key Bindings',
           click: ()=>{
             win.webContents.send('keybind');
+          }
+        },
+        {
+          label: 'Toggle Mouse/Tablet',
+          click: ()=>{
+            win.webContents.send('mtoggle');
           }
         },
         {
