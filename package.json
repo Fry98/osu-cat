@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-packager ./ Alpha --all --out Build --overwrite"
+    "build": "electron-packager ./ osu_cat --platform=win32 --arch=x64 --out Build --overwrite"
   },
   "repository": {
     "type": "git",

@@ -1,8 +1,6 @@
-const { screen } = require('electron');
-
 module.exports = ()=>{
   const mousePos = screen.getCursorScreenPoint();
-  const currentDisp = screen.getDisplayNearestPoint(mousePos).workAreaSize;
+  const currentDisp = screen.getPrimaryDisplay().size;
   if (mousePos.x < (currentDisp.width / 3)) {    
     upOrDown(0, 3);
   } else if (mousePos.x < ((currentDisp.width / 3)) * 2) {
