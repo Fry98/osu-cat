@@ -44,10 +44,15 @@ body {
   height: 30px;
 }
 
-#left, #right {
+.cont {
   margin-bottom: 6px;
 }
 
-#left-inp, #right-inp {
+.inp {
   width: 20px;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
