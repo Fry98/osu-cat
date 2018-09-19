@@ -10,7 +10,7 @@ function createWindow(){
       if (win.isMinimized()) win.restore();
       win.focus();
     }
-  });  
+  });
   if (shouldQuit) {
     app.quit();
     return;
@@ -30,14 +30,31 @@ function createWindow(){
           click: ()=>{
             win.webContents.send('mtoggle');
           }
+        }
+      ]
+    },
+    {
+      label: "Mode",
+      submenu: [
+        {
+          label: 'osu!std',
+          click: ()=>{
+            win.webContents.send('mode-std');
+          }
         },
         {
-          label: 'Exit',
+          label: 'osu!taiko',
           click: ()=>{
-            app.quit();
+            win.webContents.send('mode-taiko');
           }
         }
       ]
+    },
+    {
+      label: 'Exit',
+      click: ()=>{
+        app.quit();
+      }
     }
   ];
   const menu = Menu.buildFromTemplate(template);

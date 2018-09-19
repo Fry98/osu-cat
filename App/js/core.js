@@ -3,7 +3,7 @@ const iohook = require('iohook');
 const canv = document.getElementById('mainView');
 const ctx = canv.getContext('2d');
 const { ipcRenderer, screen } = require('electron');
-const config = require('./config.json');
+let config = require('./config.json');
 let images = [];
 let mouseArea = 0;
 let keyMap = [];
@@ -33,41 +33,77 @@ iohook.on('keyup', (e)=>{
 iohook.start();
 
 {
-  let leftCode = 0;
-  let rightCode = 0
+  let configTemp;
   ipcRenderer.on('keybind', ()=>{
-    leftCode = config.leftClick;
-    rightCode = config.rightClick;
-    document.getElementById('left-inp').value = String.fromCharCode(leftCode);
-    document.getElementById('right-inp').value = String.fromCharCode(rightCode);
-    document.getElementById('bind-overlay').style.display = 'block';
+    configTemp = JSON.parse(JSON.stringify(config));
+    $('#left-inp').val(String.fromCharCode(configTemp.leftClick));
+    $('#right-inp').val(String.fromCharCode(configTemp.rightClick));
+    $('#lct').val(String.fromCharCode(configTemp.taiko.cLeft));
+    $('#rct').val(String.fromCharCode(configTemp.taiko.cRight));
+    $('#lrt').val(String.fromCharCode(configTemp.taiko.rLeft));
+    $('#rrt').val(String.fromCharCode(configTemp.taiko.rRight));
+    $('#bind-overlay').css('display', 'block');
   });
 
-  document.getElementById('cancel').onclick = ()=>{
-    document.getElementById('bind-overlay').style.display = 'none';
+  $('#cancel').onclick = ()=>{
+    $('#bind-overlay').css('display', 'none');
   };
 
-  document.getElementById('save').onclick = ()=>{
-    document.getElementById('bind-overlay').style.display = 'none';
-    config.rightClick = rightCode;
-    config.leftClick = leftCode;
+  $('#save').onclick = ()=>{
+    console.log('ran');
+    $('#bind-overlay').css('display', 'none');
+    config = JSON.parse(JSON.stringify(configTemp));
     fs.writeFileSync(__dirname + '/config.json', JSON.stringify(config), 'utf8');
   };
 
-  document.getElementById('left-inp').onkeydown = (e)=>{
+  $('#left-inp').onkeydown = (e)=>{
     e.preventDefault();
-    leftCode = e.keyCode;
-    document.getElementById('left-inp').value = String.fromCharCode(e.keyCode);
+    configTemp.leftClick = e.keyCode;
+    $('#left-inp').val(String.fromCharCode(e.keyCode));
   };
 
-  document.getElementById('right-inp').onkeydown = (e)=>{
+  $('#right-inp').onkeydown = (e)=>{
     e.preventDefault();
-    rightCode = e.keyCode;
-    document.getElementById('right-inp').value = String.fromCharCode(e.keyCode);
+    configTemp.rightClick = e.keyCode;
+    $('#right-inp').val(String.fromCharCode(e.keyCode));
+  };
+
+  $('#lct').onkeydown = (e)=>{
+    e.preventDefault();
+    configTemp.taiko.cLeft = e.keyCode;
+    $('#lct').val(String.fromCharCode(e.keyCode));
+  };
+
+  $('#rct').onkeydown = (e)=>{
+    e.preventDefault();
+    configTemp.taiko.cRight = e.keyCode;
+    $('#rct').val(String.fromCharCode(e.keyCode));
+  };
+
+  $('#lrt').onkeydown = (e)=>{
+    e.preventDefault();
+    configTemp.taiko.rLeft = e.keyCode;
+    $('#lrt').val(String.fromCharCode(e.keyCode));
+  };
+
+  $('#rrt').onkeydown = (e)=>{
+    e.preventDefault();
+    configTemp.taiko.rRight = e.keyCode;
+    $('#rrt').val(String.fromCharCode(e.keyCode));
   };
 }
 
 ipcRenderer.on('mtoggle', ()=>{
   config.mouse = !config.mouse;
+  fs.writeFileSync(__dirname + '/config.json', JSON.stringify(config), 'utf8');
+});
+
+ipcRenderer.on('mode-std', ()=>{
+  config.taiko.active = false;
+  fs.writeFileSync(__dirname + '/config.json', JSON.stringify(config), 'utf8');
+});
+
+ipcRenderer.on('mode-taiko', ()=>{
+  config.taiko.active = true;
   fs.writeFileSync(__dirname + '/config.json', JSON.stringify(config), 'utf8');
 });

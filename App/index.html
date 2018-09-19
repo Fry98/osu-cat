@@ -3,15 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/lib/jqlite.js"></script>
 </head>
 <body>
   <div id='bind-overlay'>
     <div id='bind-box'>
-      <div id='left'>
-        LEFT CLICK: <input id='left-inp' type="text">
+      <div class='label'>osu!std</div>
+      <div class='cont'>
+        LEFT CLICK: <input id='left-inp' class='inp' type="text">
       </div>
-      <div id=right>
-        RIGHT CLICK: <input id='right-inp' type="text">
+      <div class='cont'>
+        RIGHT CLICK: <input id='right-inp' class='inp' type="text">
+      </div>
+      <div class='label'>osu!taiko</div>
+      <div class='cont'>
+        LEFT CENTER: <input id='lct' class='inp' type="text">
+      </div>
+      <div class='cont'>
+        RIGHT CENTER: <input id='rct' class='inp' type="text">
+      </div>
+      <div class='cont'>
+        LEFT RIM: <input id='lrt' class='inp' type="text">
+      </div>
+      <div class='cont'>
+        RIGHT RIM: <input id='rrt' class='inp' type="text">
       </div>
       <button id='cancel'>CANCEL</button>
       <button id='save'>SAVE</button>
