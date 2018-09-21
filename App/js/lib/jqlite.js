@@ -12,8 +12,11 @@ function $(query){
   el.css = (sel, val)=>{
     el.style[sel] = val;
   };
-  el.val = (val)=>{
-    el.value = val;
+  el.val = (data)=>{
+    if(data === undefined){
+      return el.value;
+    }
+    el.value = data;
   };
   return el;
 }

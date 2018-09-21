@@ -5,7 +5,6 @@ const url = require('url');
 function createWindow(){
   let win = new BrowserWindow({title: 'Bongo Cat for osu!', width: 640, height: 360, useContentSize: true});
   let shouldQuit = app.makeSingleInstance(() => {
-    // Someone tried to run a second instance, we should focus our window.
     if (win) {
       if (win.isMinimized()) win.restore();
       win.focus();
